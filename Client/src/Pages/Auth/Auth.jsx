@@ -10,8 +10,9 @@ const move = keyframes`
     opacity:1;
 
 }
-
 `;
+
+
 const BackgroundBox = styled.div`
   background-color: #beeefb;
   height: 50vh;
@@ -238,7 +239,7 @@ const Text = styled.div`
   }
 `;
 
-function FormComponent() {
+function Auth() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const [email, Setemail] = useState("");
@@ -302,7 +303,9 @@ function FormComponent() {
             value={email}
             onChange={handleEmailChange}
           />
+
           {emailerror && <span style={{ color: 'red' }}>{emailerror}</span>}
+          
           <Input
             type="password"
             name="password"
@@ -335,7 +338,9 @@ function FormComponent() {
             value={email}
             onChange={handleEmailChange}
           />
+
           {emailerror && <span style={{ color: 'red' }}>{emailerror}</span>}
+          
           <Input
             type="password"
             name="password"
@@ -344,7 +349,9 @@ function FormComponent() {
             value={password}
             onChange={handlePasswordChange}
           />
+
           {passworderror && <span style={{ color: 'red' }}>{passworderror}</span>}
+
           <Link href="#" onClick={handleClick}>
             Already have an Account?
           </Link>
@@ -374,4 +381,4 @@ function FormComponent() {
   );
 }
 
-export default FormComponent;
+export default Auth;

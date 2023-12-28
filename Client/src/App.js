@@ -1,12 +1,20 @@
 
 import './App.css';
-import FormComponent from './components/FormComponent';
+import Auth from './Pages/Auth/Auth';
+import Home from './Pages/Home/Home';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
-    <div>
-      <FormComponent />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />  
+        </Routes>  
+      </div>
+    </BrowserRouter>
 
   );
 }
