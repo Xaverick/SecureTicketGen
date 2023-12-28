@@ -1,0 +1,161 @@
+.container {
+    max-width: 80%;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+       
+    }
+}
+
+
+/* header css code */
+.header{
+    padding-top: 68px;
+    width: 90%;
+    margin: 0 auto;
+    .header-data{
+        padding: 30px 20px;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+
+        a{
+            background-image: none;
+            width: fit-content;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2rem;
+            padding: 1rem 3rem;
+            background-color: #2294ed;
+            color: white;
+            font-weight: 500;
+        }
+
+        h1{
+            font-size: 3.5rem;
+            // margin-top: 20px;
+        }
+
+        p{
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+        
+    }
+    
+    .right{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+        padding: 20px 0px;
+    
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        width: 100%;
+
+        .header-data{
+            width: 100%;
+            padding: 0px;
+            margin-bottom: 20px;
+        }
+
+        .right{
+            width: 100%;
+            padding: 0px;
+        }
+        
+    }
+
+}
+
+
+.header-data p{
+    width: 85%;
+    font-size: 1.2rem;
+}
+
+.header-img{
+    padding: 20px 20px;
+    width: 100%;
+
+}
+
+.header-data 
+
+.company-name {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+    text-align: center; 
+    font-weight: 700;  
+    font-size: 1.2rem;
+
+}
+
+.company-name-images{
+    max-height: 46px;
+    max-width: 155px;
+}
+
+
+
+
+/* hover button */
+.buttton-hover:hover{
+    filter: brightness(80%);
+    box-shadow: 0 0 5px #888;
+    transition: 0.2s ease-out;
+}
+
+.link-hover:hover{
+    color: #2294ed;
+}
+
+.footer-padding{
+    padding: 80px 0px;
+}
+
+.toggle-nav{
+    display: none;
+}
+
+
+.slides{
+    width: 80%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    .swiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      
+      .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+      }
+      
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+      }
+}
