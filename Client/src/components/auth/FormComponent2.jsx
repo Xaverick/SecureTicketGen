@@ -307,7 +307,7 @@ export function LoginForm() {
         
               if (response.ok) {
                 alert("Login successful");
-                navigate('/');
+                navigate('/home');
                 console.log('Login successful');
       
               } else {

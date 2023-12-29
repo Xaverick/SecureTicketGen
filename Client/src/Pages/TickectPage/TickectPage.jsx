@@ -2,6 +2,7 @@ import React from 'react'
 import './TickectPage.scss'
 import logo from '../../assets/logo.png'
 import Navbar from '../../components/Navbar/Navbar'
+import QrCode from '../../components/QrCode/QrCode' 
 
 function TickectPage() {
     return (
@@ -16,7 +17,7 @@ function TickectPage() {
                                 <img src={logo} alt="Avatar" />
                             </div>
                             <div class="flip-card-back">
-                                <img src='' alt=" " />
+                                <QrCode url="https://www.google.com/" />
                             </div>
                         </div>
                     </div>
