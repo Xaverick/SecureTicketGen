@@ -1,12 +1,35 @@
 import React from 'react'
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi"
 import { motion } from "framer-motion"
 import "./Navbar.scss";
+import {Context} from "../../utils/context"
+import { Link } from "react-router-dom";
+
 // import { images } from "../../constants";
 import logo from '../../assets/logo.png'
+
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const {userInfo,setUserInfo} = useContext(Context);
+
+  const handleLogout = () => {
+    console.log("logging out");
+    fetch(`${process.env.REACT_APP_BACKEND}/user/logout`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(null);
+        setToggle(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }
+
   return (
     <>
 
@@ -15,12 +38,23 @@ const Navbar = () => {
           <img src={logo} alt="logo" />
         </div>
         <ul className='app__navbar-links'>
-          {["", "login", "signup"].map((item) => (
-            <li className='app__flex p-text' key={`link-${item}`}>
-              <div />
-              <a href={`auth`}> {item} </a>
-            </li>
-          ))}
+          {
+            
+            userInfo ? 
+            ["logout"].map((item) => (
+              <li className='p-text' key={`${item}`}>
+                <Link to='/' onClick={handleLogout}> {item} </Link>
+              </li>
+            )) : 
+          
+            ["login", "signup"].map((item) => (
+              <li className='p-text' key={`${item}`}>
+                <a href={`auth`} onClick={() => setToggle(false)}> {item} </a>
+              </li>
+            ))
+
+          }
+
         </ul>
 
         <div className='app__navbar-menu'>
@@ -33,11 +67,22 @@ const Navbar = () => {
             >
               <ul>
                 <HiX onClick={() => setToggle(false)} />
-                {["home", "about", "work", "skills", "contact"].map((item) => (
-                  <li className='p-text' key={`${item}`}>
-                    <a href={`#${item}`} onClick={() => setToggle(false)}> {item} </a>
-                  </li>
-                ))}
+                
+                {
+                  userInfo  ? 
+                  ["logout"].map((item) => (
+                    <li className='p-text' key={`${item}`}>
+                      <a href="/" onClick={handleLogout}> {item} </a>
+                    </li>
+                  )) : 
+                
+                  ["login", "signup"].map((item) => (
+                    <li className='p-text' key={`${item}`}>
+                      <a href={`auth`} onClick={() => setToggle(false)}> {item} </a>
+                    </li>
+                  ))
+
+                }
               </ul>
             </motion.div>
           )}

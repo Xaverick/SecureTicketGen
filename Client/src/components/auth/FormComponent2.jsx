@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
-
+import { useNavigate } from 'react-router-dom';
 // Context
 export const AccountContext = createContext();
 
@@ -265,20 +265,26 @@ export default function AccountBox(props) {
 }
 
 export function LoginForm() {
+    const navigate = useNavigate();
     const { switchToSignup } = useContext(AccountContext);
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
     const [emailerror, Setemailerror] = useState("");
     const [passworderror, Setpassworderror] = useState("");
+
     const handleEmailChange = (e) => {
         Setemail(e.target.value);
         Setemailerror("");
     };
+
+
     const handlePasswordChange = (e) => {
         Setpassword(e.target.value);
         Setpassworderror("");
     };
-    const handleSignIn = (e) => {
+
+
+    const handleSignIn = async (e) => {
         e.preventDefault();
         if (!email) {
             Setemailerror("Email is required");
@@ -288,7 +294,36 @@ export function LoginForm() {
         if (!password) {
             Setpassworderror("Password is required");
         }
+        else{
+            try {
+              const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/login`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: 'include', // Include cookies in the request
+              });
+        
+              if (response.ok) {
+                alert("Login successful");
+                navigate('/');
+                console.log('Login successful');
+      
+              } else {
+                // Handle login failure
+                alert("Login failed");
+      
+                console.error('Login failed');
+              }
+            } catch (error) {
+              alert("Error during login");
+              console.error('Error during login:', error);
+            }
+          }
     };
+
+
     return (
         <BoxContainer>
             <FormContainer onSubmit={handleSignIn}>
@@ -327,6 +362,7 @@ export function LoginForm() {
 }
 
 export function SignupForm() {
+    const navigate = useNavigate();
     const { switchToSignin } = useContext(AccountContext);
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
@@ -347,7 +383,7 @@ export function SignupForm() {
         Setusernameerror("");
     };
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         if (!username) {
             Setusernameerror("Username is required");
@@ -361,6 +397,33 @@ export function SignupForm() {
 
         if (!password) {
             Setpassworderror("Password is required");
+        }
+
+
+        else{
+            try {
+              const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/register`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+                credentials: 'include', // Include cookies in the request
+              });
+        
+              if (response.ok) {
+                alert("Registration successful, Now pls Login");
+                console.log('Registration successful');
+      
+              } else {
+                // Handle login failure
+                alert("Registration failed");
+                console.error('Registration failed');
+              }
+            } catch (error) {
+              alert("Error during Registration");
+              console.error('Error during Registration:', error);
+            }
         }
     }
     return (

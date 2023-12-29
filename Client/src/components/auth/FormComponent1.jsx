@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { useNavigate } from 'react-router-dom';
+
 
 const move = keyframes`
 0%{
@@ -239,6 +241,7 @@ const Text = styled.div`
 `;
 
 function FormComponent() {
+  const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const [email, Setemail] = useState("");
@@ -259,7 +262,7 @@ function FormComponent() {
     Setusername(e.target.value);
     Setusernameerror("");
   };
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     if (!email) {
       Setemailerror("Email is required");
@@ -269,8 +272,38 @@ function FormComponent() {
     if (!password) {
       Setpassworderror("Password is required");
     }
+
+    else{
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+          credentials: 'include', // Include cookies in the request
+        });
+  
+        if (response.ok) {
+          alert("Login successful");
+          navigate('/');
+          console.log('Login successful');
+
+        } else {
+          // Handle login failure
+          alert("Login failed");
+
+          console.error('Login failed');
+        }
+      } catch (error) {
+        alert("Error during login");
+        console.error('Error during login:', error);
+      }
+    }
+
   };
-  const handleSignUp = (e) => {
+ 
+  const handleSignUp = async (e) => {
     e.preventDefault();
     if (!username) {
       Setusernameerror("Username is required");
@@ -285,6 +318,33 @@ function FormComponent() {
     if (!password) {
       Setpassworderror("Password is required");
     }
+
+    else{
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, email, password }),
+          credentials: 'include', // Include cookies in the request
+        });
+  
+        if (response.ok) {
+          alert("Registration successful, Now pls Login");
+          console.log('Registration successful');
+
+        } else {
+          // Handle login failure
+          alert("Registration failed");
+          console.error('Registration failed');
+        }
+      } catch (error) {
+        alert("Error during Registration");
+        console.error('Error during Registration:', error);
+      }
+    }
+
   }
   return (
     <>

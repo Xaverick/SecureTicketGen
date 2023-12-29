@@ -97,7 +97,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-color: #cc5577;;
 
 
   svg {
@@ -135,7 +135,7 @@
 
 
 
-
+    background-color: #cc5577;
 
     ul {
       position: relative;
@@ -159,15 +159,14 @@
       justify-content: flex-start;
       align-items: flex-start;
       flex-direction: column;
-
       li {
 
         margin: 1rem;
 
         a {
-          color: var(--gray-color);
+          color: black;
           text-decoration: none;
-          font-size: 1rem;
+          font-size: 2rem;
           text-transform: uppercase;
           font-weight: 500;
 

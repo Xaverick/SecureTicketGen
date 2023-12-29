@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Welcome.scss';
 import Navbar from '../../components/Navbar/Navbar';
 import welcome from '../../assets/welcome.png';
@@ -10,8 +10,9 @@ import pic5 from '../../assets/pic5.jpeg'
 import pic6 from '../../assets/pic6.jpeg'
 import pic7 from '../../assets/pic7.jpeg'
 import pic8 from '../../assets/pic8.jpeg'
-
+import {Context} from "../../utils/context"
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 
 // Import Swiper styles
 import 'swiper/css';
@@ -21,6 +22,32 @@ import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 const Welcome = () => {
+  const {userInfo, updateUser, setUserInfo} = useContext(Context);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/profile`, {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchData();
+    console.log(userInfo);
+  }, []); 
+
+
   return (
     <>
       <Navbar />
