@@ -328,6 +328,7 @@ function FormComponent() {
           },
           body: JSON.stringify({ username, email, password }),
           credentials: 'include', // Include cookies in the request
+
         });
   
         if (response.ok) {

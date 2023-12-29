@@ -16,7 +16,6 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database'));
 
-app.set("trust proxy", 1);
 app.engine('ejs',ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'))
@@ -30,7 +29,7 @@ app.use((req, res, next) => {
 })
 
 
-app.use(cors({ origin: true, credentials: true}));
+app.use(cors({ origin: "https://secureticket.onrender.com", credentials: true}));
 app.use (cookieParser(process.env.SECRET));
 app.use(express.json());
 
