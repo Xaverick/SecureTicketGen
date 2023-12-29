@@ -1,0 +1,114 @@
+.TickectPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.TickectPage-left,
+.TickectPage-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 12%;
+}
+
+.TickectPage-left {
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px;
+
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    /* Safari */
+    backface-visibility: hidden;
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+}
+
+.flip-card-back {
+    // background-color: dodgerblue;
+    // color: white;
+    transform: rotateY(180deg);
+}
+
+.TickectPage-right {
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.TickectPage-right {
+    h1 {
+        padding-bottom: 2%;
+    }
+
+    p {
+        padding-right: 10%;
+        font-size: 1.4rem;
+    }
+
+}
+
+.TickectPage-left {
+    h1 {
+        margin-top: -18%;
+        font-size: 2rem;
+        padding-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .TickectPage {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .TickectPage-left {
+        margin-top: 25%;
+    }
+
+    .TickectPage-right {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .TickectPage {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .TickectPage-left {
+        margin-top: 30%;
+    }
+}
