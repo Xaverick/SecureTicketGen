@@ -16,7 +16,7 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database'));
 
-
+app.set("trust proxy", 1);
 app.engine('ejs',ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'views'))
