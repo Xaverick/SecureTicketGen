@@ -82,6 +82,13 @@ module.exports.sendOTP = async (req, res) => {
         });
     }
 
+    if(Date.now() - ticketFound.reedeemed_timestamp < 18*60*60*1000 ) {
+        return res.status(400).json({
+            success: false,
+            message: 'Ticket cannot be redeemed before 18 hours',
+        });
+    }
+
     const user = await ticketFound.populate('user');
 
     if (!user) {
@@ -155,6 +162,7 @@ module.exports.validateTicket = async (req, res) => {
         return res.status(400).send('Ticket already redeemed twice');
     }
     qrCodeUser.redeemed_count += 1;
+    qrCodeUser.reedeemed_timestamp = Date.now();
     await qrCodeUser.save();
     sendMail(email, 'Ticket Validated', `Your ticket has been validated successfully and redeemed ${qrCodeUser.redeemed_count} times.`);
     await OTP.deleteOne({ otp: otp });
