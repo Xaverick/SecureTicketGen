@@ -12,13 +12,13 @@ module.exports.generateQRCode = async (req, res) => {
     const { username, email } = req.body;
     const qr_id = uuidv4()
     if (!username || !email) {
-        res.status(400).send('Please enter all fields');
+        return res.status(400).send('Please enter all fields');
     }
 
     const userfound = await user.findOne({ email });
     const exisitingUser = await qrCode.findOne({ user: userfound._id }); 
     if (exisitingUser) {
-        res.status(400).send('User already has a QR Code');
+        return res.status(400).send('User already has a QR Code');
     } 
 
     if (userfound) {
