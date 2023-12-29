@@ -13,7 +13,7 @@ function App() {
 
 
   return (
-    <BrowserRouter basename='/Client'>
+    <BrowserRouter>
       <AppContext>
         <div>
           <Routes>

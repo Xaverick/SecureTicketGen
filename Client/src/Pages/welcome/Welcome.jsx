@@ -12,7 +12,7 @@ import pic7 from '../../assets/pic7.jpeg'
 import pic8 from '../../assets/pic8.jpeg'
 import {Context} from "../../utils/context"
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { Link } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -63,9 +63,9 @@ const Welcome = () => {
 
               </p>
             </div>
-            <a href="kjvskl" className="become-tester-button buttton-hover">
+            <Link to="/auth" className="become-tester-button buttton-hover">
               Get started
-            </a>
+            </Link>
           </div>
 
           <div
