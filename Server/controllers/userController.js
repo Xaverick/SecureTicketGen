@@ -11,7 +11,7 @@ module.exports.login = async (req, res) => {
         email = email.toLowerCase();
         const user = await User.findOne({ email: email});
         if(user && bcrypt.compareSync(password, user.password)) {
-            const token = jwt.sign({ id: user._id }, `${process.env.SECRET}`, { expiresIn: '1h' });
+            const token = jwt.sign({ id: user._id, username: user.username, email: user.email}, `${process.env.SECRET}`, { expiresIn: '1h' });
             res.cookie('jwt', token, { signed: true,httpOnly: true ,maxAge: 1000 * 60 * 60 }).json('login');
         } 
         else {
@@ -39,13 +39,26 @@ module.exports.register = async (req, res) => {
     }
 }
 
+module.exports.sendUserVerificationEmail = async (req, res) => {
+    const { userid } = req.params;
+    const user = await User.findOne({ _id: userid });
+
+    if (!user) {
+        return res.status(400).json('user not found');
+    }
+
+    if (user.verified) {
+        return res.status(400).json('user already verified');
+    }
+
+    await sendVerificationEmail(user.email, user);
+    return res.json('email sent');
+};
+
 const sendVerificationEmail = async (email,user) => {
     const secret = `${process.env.SECRET}`;
     const token = jwt.sign({ id: User._id } , secret , { expiresIn: '5m' });
-    // const link = `${clientLink}/resetpassword/${user._id}/${token}`;
-    // const link = `http://localhost:3000/user/resetpassword/${user._id}/${token}`;
-    // res.json(link);
-    //sending Email to the user Gmail
+
     let config = {
         service: 'gmail',
         auth: {
@@ -65,14 +78,14 @@ const sendVerificationEmail = async (email,user) => {
 
     var response = {
         body: {
-            name: 'John Appleseed',
-            intro: 'this is for thwe verification of the email you have provided',
+            name: `${user.username}`,
+            intro: 'this is for the verification of the email you have provided',
             action: {
                 instructions: 'Click the button below to verify the email:',
                 button: {
                     color: '#DC4D2F',
                     text: 'Click here',
-                    link: `http://localhost:4000/user/verifyEmail/${user._id}/${token}`
+                    link: `${process.env.DOMAIN}/user/verifyEmail/${user._id}/${token}`
                 }
             },
             outro: 'If you did not request a verification email, no further action is required on your part.'
@@ -99,7 +112,7 @@ module.exports.verifyUser = async (req, res) => {
     const user = await User.findById(userid);
 
     if(!user){
-        res.status(400).json('user not found');
+        return res.status(400).json('user not found');
     }
 
     else{
@@ -110,7 +123,7 @@ module.exports.verifyUser = async (req, res) => {
             res.render('verifyEmail');
         }
         else{
-            res.status(400).json('invalid token');
+            return res.status(400).json('invalid token');
         }
     }
 }
@@ -140,10 +153,6 @@ module.exports.forgotPassword = async (req, res) => {
     if(user){
         const secret = `${process.env.SECRET}${user.password}`;
         const token = jwt.sign({ id: user._id } , secret , { expiresIn: '5m' });
-        // const link = `${clientLink}/resetpassword/${user._id}/${token}`;
-        // const link = `http://localhost:3000/user/resetpassword/${user._id}/${token}`;
-        // res.json(link);
-        //sending Email to the user Gmail
 
         let config = {
             service: 'gmail',

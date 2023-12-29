@@ -16,4 +16,3 @@ router.route('/getQRCode')
 
 
 module.exports = router;
-

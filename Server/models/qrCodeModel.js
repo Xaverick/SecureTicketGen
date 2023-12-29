@@ -21,10 +21,10 @@ const qrCodeSchema = new schema({
         default: 0,
     },
 
-    // redeemed: {
-    //     type: Boolean,
-    //     default: false,
-    // },
+    reedeemed_timestamp: {
+        type: Date,
+        default: null,
+    },
 
 });
 

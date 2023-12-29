@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate')%>
+<h1>Enter OTP</h1>
+<form action="/admin/verifyOTP" method="post">
+    <label for="otp">OTP:</label>
+    <input type="text" id="otp" name="otp" required>
+    
+    <!-- Hidden input for additional item -->
+    <input type="hidden" name="ticketid" value="<%= ticketid %>"">
+    
+    <button type="submit">Verify OTP</button>
+</form>
+
+<!-- Button to resend OTP -->
+<form action="" method="post">
+    <!-- Hidden input to include ticketid -->
+    <input type="hidden" name="additionalItem" value="<%= ticketid %>">
+    
+    <button type="submit">Send OTP</button>
+</form>
