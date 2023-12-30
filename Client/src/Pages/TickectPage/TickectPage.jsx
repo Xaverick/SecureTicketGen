@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import './TickectPage.scss'
 import logo from '../../assets/logo.png'
 import Navbar from '../../components/Navbar/Navbar'
 import QrCode from '../../components/qrcode/QrCode' 
+
+
 
 function TickectPage() {
     return (
