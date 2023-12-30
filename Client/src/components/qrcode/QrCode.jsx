@@ -29,13 +29,14 @@ const QrCode = ({url}) => {
 
     return (
 
-        <div className="qrcode">
+        // <div className="qrcode">
+            <>
+                <img src={qr} className="image" alt="your ticket" />
+                <a href={qr} download="qrcode.png" className="button">Download</a>
+            </>
 
-            <img src={qr} className="image" alt="your ticket" />
-            <a href={qr} download="qrcode.png">Download</a>
 
-
-        </div>
+        // </div>
 
     )
 
