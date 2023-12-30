@@ -5,9 +5,11 @@ import Welcome from './Pages/welcome/Welcome';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppContext from "./utils/context";
 import TickectPage from './Pages/TickectPage/TickectPage';
+import PrivateRoutes from './utils/PrivateRoute'
 
 
 function App() {
+
 
 
 
@@ -19,9 +21,12 @@ function App() {
           <Routes>
 
             <Route path="/" element={<Welcome />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/ticketpage" element={<TickectPage />} />
+
+            <Route element={<PrivateRoutes />}>     
+              <Route path="/ticketpage" element={<TickectPage />} />
+              <Route path="/home" element={<Home />} />
+            </Route>
 
           </Routes>
         </div>

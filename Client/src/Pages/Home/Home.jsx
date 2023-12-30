@@ -11,30 +11,6 @@ const Home = () => {
   const navigate = useNavigate();
   const { userInfo, updateUser, setUserInfo } = useContext(Context);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/profile`, {
-          method: 'GET',
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setUserInfo(data);
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(userInfo);
-
   const handleTicketButton = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND}/generateQRCode`, {
@@ -97,7 +73,9 @@ const Home = () => {
             4. The leaderboard displays the top 5 players based on their scores.
             Rewards or discount coupons are allocated to these top 5 players.
           </p>
+
           <br />
+          <p> <b>Pls verify your Email before issuing your ticket </b> </p>
           <br />
           <button className='button' onClick={handleTicketButton}>Get your Tickect</button>
         </div>

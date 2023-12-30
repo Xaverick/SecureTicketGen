@@ -13,29 +13,6 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   
   const {userInfo, updateUser, setUserInfo} = useContext(Context);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/profile`, {
-          method: 'GET',
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setUserInfo(data);
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-      }
-    };
-
-    fetchData();
-  }, []); 
-
   const handleLogout = () => {
     console.log("logging out");
     fetch(`${process.env.REACT_APP_BACKEND}/user/logout`, {

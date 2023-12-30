@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useNavigate } from 'react-router-dom';
+const { Context } = require('../../utils/context');
 
 
 const move = keyframes`
@@ -242,6 +243,7 @@ const Text = styled.div`
 
 function FormComponent() {
   const navigate = useNavigate();
+  const { userInfo, updateUser, setUserInfo } = useContext(Context);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const [email, Setemail] = useState("");
@@ -286,7 +288,7 @@ function FormComponent() {
   
         if (response.ok) {
           alert("Login successful");
-          navigate('/home');
+          // navigate('/home');
           console.log('Login successful');
 
         } else {
@@ -295,11 +297,38 @@ function FormComponent() {
 
           console.error('Login failed');
         }
+        const fetchData = async () => {
+          try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/profile`, {
+              method: 'GET',
+              credentials: 'include',
+            });
+    
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json();
+            setUserInfo(data);
+          } catch (error) {
+            console.error('Error fetching user profile:', error);
+          }
+        };
+    
+        fetchData().then(() => {
+            navigate('/home');
+
+        })
+
+
+
       } catch (error) {
         alert("Error during login");
         console.error('Error during login:', error);
       }
     }
+
+
 
   };
  
@@ -332,7 +361,7 @@ function FormComponent() {
         });
   
         if (response.ok) {
-          alert("Registration successful, Now pls Login");
+          alert("Registration successful, Email is sent, Pls verify Your Email, and pls Login");
           console.log('Registration successful');
 
         } else {
@@ -340,6 +369,7 @@ function FormComponent() {
           alert("Registration failed");
           console.error('Registration failed');
         }
+
       } catch (error) {
         alert("Error during Registration");
         console.error('Error during Registration:', error);

@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+const { Context } = require('../../utils/context');
 // Context
 export const AccountContext = createContext();
 
@@ -266,6 +267,7 @@ export default function AccountBox(props) {
 
 export function LoginForm() {
     const navigate = useNavigate();
+    const { userInfo, updateUser, setUserInfo } = useContext(Context);
     const { switchToSignup } = useContext(AccountContext);
     const [email, Setemail] = useState("");
     const [password, Setpassword] = useState("");
@@ -307,7 +309,7 @@ export function LoginForm() {
         
               if (response.ok) {
                 alert("Login successful");
-                navigate('/home');
+                
                 console.log('Login successful');
       
               } else {
@@ -316,6 +318,30 @@ export function LoginForm() {
       
                 console.error('Login failed');
               }
+              const fetchData = async () => {
+                try {
+                  const response = await fetch(`${process.env.REACT_APP_BACKEND}/user/profile`, {
+                    method: 'GET',
+                    credentials: 'include',
+                  });
+          
+                  if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+          
+                  const data = await response.json();
+                  setUserInfo(data);
+                } catch (error) {
+                  console.error('Error fetching user profile:', error);
+                }
+              };
+          
+              fetchData().then(() => {
+                  navigate('/home');
+      
+              })
+
+
             } catch (error) {
               alert("Error during login");
               console.error('Error during login:', error);
@@ -412,7 +438,7 @@ export function SignupForm() {
               });
         
               if (response.ok) {
-                alert("Registration successful, Now pls Login");
+                alert("Registration successful, Email is sent, Pls verify Your Email, and pls Login");
                 console.log('Registration successful');
       
               } else {
