@@ -18,9 +18,9 @@ const QrCode = ({url}) => {
         }, (err, url) => {
             if (err) return console.error(err)
     
-            console.log(url)
+            // console.log(url)
             setQr(url)
-            console.log(qr);
+            // console.log(qr);
         })
     }, [url])
 
