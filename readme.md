@@ -8,31 +8,72 @@ SecureTicketGen is a Ticket Generation and Validation System designed for effici
 - **Validation Mechanism:** Implement a reliable ticket validation system to prevent unauthorized access.
 - **Security:** Utilize cryptographic techniques to enhance the security of generated tickets.
 - **Efficiency:** Swift and seamless ticketing processes for both generation and validation.
+- **Gamification:** We implemented gamification elements to enhance user interest and encourage registrations.
+
 
 ## Getting Started
 
-### Prerequisites
-
-- [List any prerequisites or dependencies here]
-
 ### Installation
 
-[Provide installation instructions here]
+Clone the project 
 
-## Usage
+ ### Server
+``` bash
+git clone https://github.com/Your-GitHubUsername/SecureTicketGen
+```
+Go to the project directory
 
-[Include usage instructions and examples here]
+``` bash
+cd my-project
+```
+Install dependencies
 
-## Configuration
+``` bash
+npm install
+```
+Start the server
 
-[Explain any configuration options or settings]
+``` bash
+nodemon app.js
+```
+### Client
+``` bash
+git clone https://github.com/Your-GitHubUsername/SecureTicketGen
+```
+Go to the project directory
 
-## Contributing
+``` bash
+cd client
+```
+Install dependencies
 
-We welcome contributions! Please follow our [contribution guidelines](CONTRIBUTING.md).
+``` bash
+npm i
+```
+Start the server
+
+``` bash
+npm start
+```
+
+
+## Tech Stack
+*Server:*Node,Express,MongoDB,Authentication and Autherization,NodeMailer,MailGen
+*Client:*React
 
 ## Acknowledgments
 
-[Give credit to any external libraries, resources, or individuals you'd like to acknowledge]
+We would like to express our gratitude to the following individuals and communities who have contributed to the success of this project:
+
+- **[Kartik Agarwal]:** [All Backend Part]
+- **[Yash Mittal]:** [All Frontend Part]
+- **[Lavanya Jain]:** [All Gamification Part]
+- **[Jiit Optica]:** [Thanks for giving this oppurtunity]
+
+Thank you for your invaluable contributions, guidance, and support throughout the development of this project. Your efforts have made a significant impact, and we appreciate your involvement.
+
+
+
+
 
 
