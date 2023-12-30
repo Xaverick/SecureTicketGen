@@ -58,8 +58,9 @@ npm start
 
 
 ## Tech Stack
-*Server:*Node,Express,MongoDB,Authentication and Autherization,NodeMailer,MailGen
-*Client:*React
+**Server:** Node, Express, MongoDB, Authentication and Autherization, NodeMailer,MailGen
+**Client:** React
+**Gamification:** python
 
 ## Acknowledgments
 
