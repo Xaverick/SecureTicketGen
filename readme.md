@@ -10,56 +10,65 @@ SecureTicketGen is a Ticket Generation and Validation System designed for effici
 - **Efficiency:** Swift and seamless ticketing processes for both generation and validation.
 - **Gamification:** We implemented gamification elements to enhance user interest and encourage registrations.
 
-
 ## Getting Started
 
 ### Installation
 
-Clone the project 
+Clone the project
 
- ### Server
-``` bash
+### Server
+
+```bash
 git clone https://github.com/Your-GitHubUsername/SecureTicketGen
 ```
+
 Go to the project directory
 
-``` bash
+```bash
 cd my-project
 ```
+
 Install dependencies
 
-``` bash
+```bash
 npm install
 ```
+
 Start the server
 
-``` bash
+```bash
 nodemon app.js
 ```
+
 ### Client
-``` bash
+
+```bash
 git clone https://github.com/Your-GitHubUsername/SecureTicketGen
 ```
+
 Go to the project directory
 
-``` bash
+```bash
 cd client
 ```
+
 Install dependencies
 
-``` bash
+```bash
 npm i
 ```
+
 Start the server
 
-``` bash
+```bash
 npm start
 ```
 
-
 ## Tech Stack
-*Server:*Node,Express,MongoDB,Authentication and Autherization,NodeMailer,MailGen
-*Client:*React
+
+**Server:** Node, Express, MongoDB, Authentication and Autherization, NodeMailer, MailGen
+**Client:** React
+**Gamefication:** Python, Pygame
 
 ## Acknowledgments
 
@@ -71,9 +80,3 @@ We would like to express our gratitude to the following individuals and communit
 - **[Jiit Optica]:** [Thanks for giving this oppurtunity]
 
 Thank you for your invaluable contributions, guidance, and support throughout the development of this project. Your efforts have made a significant impact, and we appreciate your involvement.
-
-
-
-
-
-
