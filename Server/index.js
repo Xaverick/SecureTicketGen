@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 })
 
 
-app.use(cors({ origin: `${process.env.ORIGIN}`, credentials: true}));
+app.use(cors({ origin: [`${process.env.ORIGIN}`, "https://secure-ticket-gen.vercel.app"], credentials: true}));
 app.use (cookieParser(process.env.SECRET));
 app.use(express.json());
 
