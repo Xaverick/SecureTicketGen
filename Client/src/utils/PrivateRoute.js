@@ -4,9 +4,10 @@ const { Context } = require('./context');
 
 
 const PrivateRoutes = () => {
-  const { userInfo, updateUser, setUserInfo } = useContext(Context);
+  const user = localStorage.getItem('user') 
+  
     return(
-        userInfo ? <Outlet/> : <Navigate to="/auth"/>
+        user ? <Outlet/> : <Navigate to="/auth"/>
     )
 }
 

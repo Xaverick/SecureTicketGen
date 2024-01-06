@@ -309,6 +309,8 @@ function FormComponent() {
             }
     
             const data = await response.json();
+            localStorage.setItem('user', JSON.stringify(data));
+            localStorage.setItem('loginTime', new Date());
             setUserInfo(data);
           } catch (error) {
             console.error('Error fetching user profile:', error);
@@ -362,6 +364,7 @@ function FormComponent() {
   
         if (response.ok) {
           alert("Registration successful, Email is sent, Pls verify Your Email, and pls Login");
+          setClick(!click)
           console.log('Registration successful');
 
         } else {
@@ -377,6 +380,7 @@ function FormComponent() {
     }
 
   }
+  
   return (
     <>
       {" "}

@@ -11,17 +11,18 @@ import logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  
-  const {userInfo, updateUser, setUserInfo} = useContext(Context);
+  const user = localStorage.getItem('user');
+
   const handleLogout = () => {
     console.log("logging out");
+    localStorage.removeItem('user');
+    localStorage.removeItem('loginTime');
     fetch(`${process.env.REACT_APP_BACKEND}/user/logout`, {
       method: "GET",
       credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {
-        setUserInfo(null);
         setToggle(false);
       })
       .catch((err) => {
@@ -40,7 +41,7 @@ const Navbar = () => {
         <ul className='app__navbar-links'>
           {
             
-            userInfo ? 
+            user ? 
             ["logout"].map((item) => (
               <li className='p-text' key={`${item}`}>
                 <Link to='/' onClick={handleLogout}> {item} </Link>
@@ -69,7 +70,7 @@ const Navbar = () => {
                 <HiX onClick={() => setToggle(false)} />
                 
                 {
-                  userInfo  ? 
+                  user  ? 
                   ["logout"].map((item) => (
                     <li className='p-text' key={`${item}`}>
                       <a href="/" onClick={handleLogout}> {item} </a>

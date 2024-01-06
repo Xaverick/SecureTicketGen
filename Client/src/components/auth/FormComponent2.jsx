@@ -330,6 +330,8 @@ export function LoginForm() {
                   }
           
                   const data = await response.json();
+                  localStorage.setItem('user', JSON.stringify(data));
+                  localStorage.setItem('loginTime', new Date());
                   setUserInfo(data);
                 } catch (error) {
                   console.error('Error fetching user profile:', error);
@@ -439,6 +441,7 @@ export function SignupForm() {
         
               if (response.ok) {
                 alert("Registration successful, Email is sent, Pls verify Your Email, and pls Login");
+                switchToSignin()
                 console.log('Registration successful');
       
               } else {

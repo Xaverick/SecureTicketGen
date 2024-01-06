@@ -10,21 +10,23 @@ const { Context } = require('../../utils/context');
 const Home = () => {
   const navigate = useNavigate();
   const { userInfo, updateUser, setUserInfo, ticket_id, setTicketid } = useContext(Context);
-
+  const user = JSON.parse(localStorage.getItem('user'));
   const handleTicketButton = async () => {
+
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND}/generateQRCode`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: userInfo.username, email: userInfo.email }),
+        body: JSON.stringify({ username: user.username, email: user.email }),
         credentials: 'include', // Include cookies in the request
       });
 
       if (response.ok) {
         alert("Ticket issued");
-        navigate('/TicketPage');
+        await handlegoto();
+        // navigate('/TicketPage');
         console.log('Ticket issued');
 
       } else {
@@ -42,32 +44,37 @@ const Home = () => {
 
   }
 
-  // const handlegoto = async () => {
-  //     try {
-  //       const response = await fetch(`${process.env.REACT_APP_BACKEND}/getQRCode`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ username: userInfo.username, email: userInfo.email }),
-  //         credentials: 'include', // Include cookies in the request
-  //       });
+  const handlegoto = async () => {
 
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setTicketid(data.ticket_id);
-  //         navigate('/TicketPage');
-  //         console.log('Ticket id fetched');
-  //       } else {
-  //         // Handle login failure
-  //         console.error('Ticket id not fetched');
-  //       }
-  //     }
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND}/getQRCode`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: user.username, email: user.email }),
+          credentials: 'include', // Include cookies in the request
+        });
 
-  //     catch (error) {
-  //       console.error(error);
-  //     }
-  // }
+        if (response.ok) {
+          const data = await response.json();
+          const settingticket = async () => {
+            setTicketid(data);
+          }
+          await settingticket();
+          console.log(ticket_id);
+          navigate('/TicketPage');
+          console.log('Ticket id fetched');
+        } else {
+          // Handle login failure
+          console.error('Ticket id not fetched');
+        }
+      }
+
+      catch (error) {
+        console.error(error);
+      }
+  }
 
   
 
@@ -109,7 +116,7 @@ const Home = () => {
           <p> <b>Pls verify your Email before issuing your ticket </b> </p>
           <br />
           <button className='button' onClick={handleTicketButton}>Get your Tickect</button>
-          {/* <button className='button' onClick={handlegoto}>Go To Ticket Page</button> */}
+          <button className='button' onClick={handlegoto}>Go To Ticket Page</button>
         </div>
       </div>
     </>

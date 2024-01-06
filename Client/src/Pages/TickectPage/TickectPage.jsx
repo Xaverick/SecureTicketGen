@@ -1,12 +1,18 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useContext} from 'react'
 import './TickectPage.scss'
 import logo from '../../assets/logo.png'
 import Navbar from '../../components/Navbar/Navbar'
 import QrCode from '../../components/qrcode/QrCode' 
-
+const { Context } = require('../../utils/context');
 
 
 function TickectPage() {
+    const { ticket_id } = useContext(Context);
+
+    useEffect(() => {
+
+    }, [])
+
     return (
         <>
             <Navbar />
@@ -19,7 +25,7 @@ function TickectPage() {
                                 <img src={logo} alt="Avatar" />
                             </div>
                             <div class="flip-card-back">
-                                <QrCode url="https://www.google.com/" />
+                                <QrCode url={ticket_id} />
                             </div>
                         </div>
                     </div>

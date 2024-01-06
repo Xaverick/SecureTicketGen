@@ -18,6 +18,9 @@ const AppContext = ({ children }) => {
         window.scrollTo(0, 0);
     }, [location]);
 
+    
+  
+
     return (
         <Context.Provider
             value={{   
